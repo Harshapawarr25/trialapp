@@ -1,0 +1,22 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+    commands:
+      - echo "Install phase started"
+
+  build:
+    commands:
+      - echo "Build phase started"
+      - echo "Nothing to build - static AngularJS app"
+
+  post_build:
+    commands:
+      - echo "Deploying to S3"
+      - aws s3 sync . s3://prac-eight --delete
+
+artifacts:
+  files:
+    - '**/*'
